@@ -420,7 +420,7 @@ void * extract_photon_layer(void * args)
 	char * filename = malloc(1000); // TODO: preprocessor
 	int pixel;
 	int j, i, color, length;
-	struct photon_layer_header * h = &meta[start];
+	struct photon_layer_header * h = &meta[start*anti_aliasing];
 
 	int n;
 	for (n = start; n < end; n++) {
@@ -493,9 +493,9 @@ int write_photon_layer(char * imagedata, int width, int height, char * rledata, 
 {
 	//long buflen = 250000; // TODO: move to precompiler
 	// we can't cast into array char[buflen][] type, so we have to be careful
-	rledata = (char *) malloc(BUFLEN * aa_level);
-	lengths = malloc(sizeof(int) * aa_level);
-	int i;
+	//rledata = (char *) malloc(BUFLEN * aa_level);
+	//lengths = malloc(sizeof(int) * aa_level);
+	int i = 0;
 	int length, color; // isn't really a color, but sounds better
 	int startcolor;
 	length = 1;
